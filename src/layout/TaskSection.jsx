@@ -5,7 +5,7 @@ import manageTasks from '../db/CRUDIndexedDB';
 
 // Import icon components
 import CheckIcon from '../components/icons/CheckIcon';
-import TrashCan from '../components/icons/trashCan';
+import TrashCan from '../components/icons/TrashCan';
 
 function TaskSection() {
     // State declarations
