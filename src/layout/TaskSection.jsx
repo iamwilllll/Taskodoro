@@ -19,9 +19,9 @@ function TaskSection() {
     }, []);
 
     // Function to fetch tasks from IndexedDB
-    async function getTaskList() {
+    const getTaskList = async () => {
         setTaskList(await manageTasks.read());
-    }
+    };
 
     // Handler for input field changes
     const handleChange = event => setTask(event.target.value);
@@ -54,7 +54,7 @@ function TaskSection() {
     };
 
     // Handler for checkbox changes (marking tasks complete/incomplete)
-    function handleCheckbox(event, taskID) {
+    const handleCheckbox = (event, taskID) => {
         const checked = event.target.checked;
 
         // Update task completion status in local state
@@ -66,13 +66,13 @@ function TaskSection() {
 
         // Update task in IndexedDB
         manageTasks.edit(taskID, checked);
-    }
+    };
 
     // Function to delete a task
-    async function deleteTask(id) {
+    const deleteTask = async id => {
         manageTasks.delete(id); // Delete from IndexedDB
         await getTaskList(); // Refresh task list
-    }
+    };
 
     return (
         <section className="h-full flex flex-col flex-1 gap-6 lg:max-w-1/2 w-1/2 border border-line-color rounded-2xl px-5 py-10">
@@ -95,14 +95,18 @@ function TaskSection() {
                                     checked={completed}
                                     onChange={event => handleCheckbox(event, id)}
                                 />
-                                <label htmlFor={id} className="text-xl text-primary-font-color">
+                                <label htmlFor={id} className="text-xl text-primary-font-color hover:cursor-pointer">
                                     {description}
                                 </label>
                             </div>
 
                             <div>
                                 <button onClick={() => deleteTask(id)}>
-                                    <TrashCan width={25} height={25} className="text-primary-color" />
+                                    <TrashCan
+                                        width={25}
+                                        height={25}
+                                        className="text-primary-color hover:cursor-pointer hover:scale-125 transition-transform "
+                                    />
                                 </button>
                             </div>
                         </div>
