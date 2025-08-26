@@ -1,20 +1,39 @@
 import changeTheme from '../utils/changeTheme';
+import CloseIcon from './icons/CloseIcon';
 
-function configurationModal({ showModal }) {
+function ConfigurationModal({ showModal, setShowModal }) {
+    const closeOnOverlayClick = event => {
+        if (event.target !== event.currentTarget) return;
+
+        setShowModal(false);
+    };
+
+    const closeModal = () => setShowModal(false);
+
     return (
         <section
-            className={`absolute ${showModal ? 'top-0' : '-top-100 lg:-top-125'} right-0 w-full p-5 h-1/3 bg-modal-bg transition-[top] duration-1000 flex justify-center items-center border border-transparent border-b-line-color lg:w-1/4 lg:h-1/2 lg:border-line-color`}
+            className={`absolute inset-0 m-auto w-full h-full bg-[#00000090] ${showModal ? 'flex' : 'hidden'}`}
+            onClick={closeOnOverlayClick}
         >
-            <select
-                onChange={changeTheme}
-                className="w-full p-2 outline-none border border-line-color hover:brightness-90 hover:cursor-pointer bg-primary-color text-primary-font-color"
-            >
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-                <option value="focus">Focus</option>
-            </select>
+            <aside className={`m-auto w-10/12 h-9/12 lg:w-4/12 bg-modal-bg rounded-2xl p-5 border-2 border-line-color`}>
+                <button
+                    className="text-secondary-font-color hover:scale-115 transition hover:cursor-pointer"
+                    onClick={closeModal}
+                >
+                    <CloseIcon />
+                </button>
+                <h2 className="text-center my-5 font-bold text-3xl text-secondary-font-color">Setting</h2>
+                <select
+                    onChange={changeTheme}
+                    className="w-full p-3 border border-line-color rounded outline-none hover:cursor-pointer text-secondary-font-color"
+                >
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                    <option value="focus">Focus</option>
+                </select>
+            </aside>
         </section>
     );
 }
 
-export default configurationModal;
+export default ConfigurationModal;
