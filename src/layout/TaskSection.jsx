@@ -79,7 +79,9 @@ function TaskSection() {
             <div className="w-full border border-transparent border-t-line-color"></div>
             <header className="flex justify-between items-center">
                 <h2 className="text-3xl lg:text-5xl text-primary-font text-primary-font-color font-bold">Task list</h2>
-                <CheckIcon width={50} height={50} className="text-primary-color" />
+                <button className="flex items-center justify-center h-full w-4/12 lg:w-2/12 gap-2 bg-primary-color p-1 rounded text-primary-font-color font-bold hover:cursor-pointer hover:scale-110 transition-transform">
+                    Complete all
+                </button>
             </header>
 
             <div className="flex flex-1 flex-col gap-3" id="TaskContainer">
@@ -105,7 +107,7 @@ function TaskSection() {
                                     <TrashCan
                                         width={25}
                                         height={25}
-                                        className="text-primary-color hover:cursor-pointer hover:scale-125 transition-transform "
+                                        className="text-primary-color hover:cursor-pointer hover:scale-110 transition-transform"
                                     />
                                 </button>
                             </div>

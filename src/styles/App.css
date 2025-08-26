@@ -1,11 +1,13 @@
 @import 'tailwindcss';
 
 :root {
-    --primary-color: #c06c5b;
-    --primary-bg: #2e2e2e;
-    --secondary-bg: #3a3a3a;
-    --line-color: #4a4a4a;
-    --primary-font-color: #f0f0f0;
+    --primary-color: #b292ff;
+    --primary-bg: #131313;
+    --secondary-bg: #272727;
+    --line-color: #b7adc5;
+    --primary-font-color: #dfdfdf;
+    --secondary-font-color: #333333;
+    --modal-bg: #dfdfdf;
 }
 
 :root[data-theme='light'] {
@@ -14,14 +16,18 @@
     --secondary-bg: #d8c7c4;
     --line-color: #bcaaa6;
     --primary-font-color: #2a1f1d;
+    --secondary-font-color: #2a1f1d;
+    --modal-bg: #dfdfdf;
 }
 
 :root[data-theme='focus'] {
-    --primary-color: #646464;
+    --primary-color: #999999;
     --primary-bg: #121212;
-    --secondary-bg: #1e1e1e;
-    --line-color: #2a2a2a;
+    --secondary-bg: #333333;
+    --line-color: #aaaaaa;
     --primary-font-color: #e0e0e0;
+    --secondary-font-color: #e0e0e0;
+    --modal-bg: #121212;
 }
 
 @theme {
@@ -31,5 +37,7 @@
     --color-secondary-bg: var(--secondary-bg);
     --color-line-color: var(--line-color);
     --color-primary-font-color: var(--primary-font-color);
+    --color-secondary-font-color: var(--secondary-font-color);
+    --color-modal-bg: var(--modal-bg);
     --font-primary-font: 'Lato', sans-serif;
 }
