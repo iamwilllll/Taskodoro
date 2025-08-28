@@ -16,7 +16,7 @@ function ConfigurationModal({ showModal, setShowModal }) {
     return (
         <section
             // This is the semi-transparent dark background behind the modal
-            className={`absolute inset-0 m-auto w-full h-full bg-[#00000090] ${showModal ? 'flex' : 'hidden'}`}
+            className={`absolute inset-0 m-auto w-screen h-screen bg-[#00000090] ${showModal ? 'flex' : 'hidden'}`}
             onClick={closeOnOverlayClick}
         >
             {/* The actual modal box that pops up */}

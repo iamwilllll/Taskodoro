@@ -15,7 +15,7 @@ function ConfigurationModal({ showEditModal, setShowEditModal, getTaskList, task
     return (
         <section
             // Dark semi-transparent overlay that covers the whole screen
-            className={`absolute inset-0 m-auto w-full h-full bg-[#00000090] ${showEditModal ? 'flex' : 'hidden'}`}
+            className={`absolute inset-0 m-auto w-screen h-screen bg-[#00000090] ${showEditModal ? 'flex' : 'hidden'}`}
             onClick={closeOnOverlayClick}
         >
             {/* The actual modal box that contains the edit form */}
