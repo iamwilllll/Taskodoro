@@ -42,8 +42,8 @@ function ConfigurationModal({ showModal, setShowModal }) {
                     {/* Options for different themes - looks like the labels might be mixed up? */}
                     <SelectOption value="null" label="Select your value" />
                     <SelectOption value="Light" label="Light" />
-                    <SelectOption value="Dark" label="Dark" />
-                    <SelectOption value="Focus" label="Focus" />
+                    <SelectOption value="dark" label="Dark" />
+                    <SelectOption value="focus" label="Focus" />
                 </select>
             </aside>
         </section>
