@@ -4,8 +4,12 @@ import SoundOn from '../components/icons/SoundOn';
 function TimerSection() {
     return (
         <section className="flex flex-col items-center justify-center lg:max-w-1/2 w-1/2 gap-10">
+            {/* Timer display - shows 25:00 (Pomodoro default) */}
             <header className="text-7xl font-bold text-primary-font-color">25:00</header>
+
+            {/* Control buttons at the bottom */}
             <footer className="flex gap-5 bg-secondary-bg py-5 px-15 rounded-full">
+                {/* Pause/play button for timer control */}
                 <button>
                     <PauseIcon
                         width={70}
@@ -13,6 +17,8 @@ function TimerSection() {
                         className="text-primary-color hover:scale-110 hover:cursor-pointer hover:brightness-110 transition-transform transition-color"
                     />
                 </button>
+
+                {/* Sound toggle button for timer alerts */}
                 <button>
                     <SoundOn
                         width={70}

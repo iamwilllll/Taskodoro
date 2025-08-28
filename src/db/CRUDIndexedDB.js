@@ -1,76 +1,86 @@
 // Import function to create/initialize IndexedDB
 import { indexedDBError } from '../utils/handleCustomErrors';
-import initDB from './initIndexedDB';
+import initDB from './InitIndexedDB';
 
-// Create a class to handle CRUD operations for tasks in IndexedDB
+// Class that handles all the database operations for tasks
 class taskCRUD {
-    // Create a new task in the database
+    // Add a new task to the database
     create(task) {
         new Promise(async (resolve, reject) => {
-            // Validate that no property in the task object has an empty value
+            // Quick check to make sure we're not adding empty tasks
             for (const key in task) if (task[key] === '') return;
 
-            // Initialize the database and get a reference to the object store
+            // Get our database connection
             const db = await initDB();
             const store = db.transaction('tasks', 'readwrite').objectStore('tasks');
 
-            // Resolve with the add operation result or reject with an error
+            // Try to add the task, handle errors if it fails
             resolve(store.add(task));
             reject(new indexedDBError('The task could not be created'));
         });
     }
 
-    // Read all tasks from the database
+    // Get all tasks from the database
     read() {
         return new Promise(async (resolve, reject) => {
             const db = await initDB();
 
-            // Create a read-only transaction and get all records from the store
+            // Set up a read transaction and grab everything from the store
             const store = db.transaction('tasks', 'readonly').objectStore('tasks');
             const request = store.getAll();
 
-            // Handle the successful request or error
+            // Return the results or error out
             request.onsuccess = () => resolve(request.result);
             request.onerror = () => reject(request.error);
         });
     }
 
-    // Edit a specific task's completion status
-    async edit(taskID, checked) {
-        const db = await initDB();
-        const store = db.transaction('tasks', 'readwrite').objectStore('tasks');
-        const request = store.openCursor(); // Open a cursor to iterate through records
+    // Update an existing task
+    async edit(task) {
+        new Promise(async (resolve, reject) => {
+            const db = await initDB();
+            const store = db.transaction('tasks', 'readwrite').objectStore('tasks');
+            const request = store.put(task); // put() updates if exists, adds if not
 
-        request.onsuccess = event => {
-            const cursor = event.target.result;
-
-            if (cursor) {
-                // Check if current record matches the task ID we want to edit
-                if (cursor.value.id === taskID) {
-                    // Create an updated task with the new completion status
-                    const updatedTask = { ...cursor.value, completed: checked };
-                    cursor.update(updatedTask); // Update the record in the database
-                }
-
-                cursor.continue(); // Move to the next record
-            }
-        };
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => reject(request.error);
+        });
     }
 
-    // Delete a task by its ID
+    // Remove a task by its ID
     async delete(id) {
         new Promise(async (resolve, reject) => {
-            // Initialize the database and get a reference to the object store
             const db = await initDB();
             const store = db.transaction('tasks', 'readwrite').objectStore('tasks');
 
-            // Resolve with the delete operation result or reject with an error
+            // Delete the task and handle the result
             resolve(store.delete(id));
             reject(new indexedDBError('The task could not be deleted'));
         });
     }
+
+    // Toggle the completed status of a specific task
+    async checked(taskID, checked) {
+        const db = await initDB();
+        const store = db.transaction('tasks', 'readwrite').objectStore('tasks');
+        const checkedRequest = store.openCursor(); // We use a cursor to find the right task
+
+        checkedRequest.onsuccess = event => {
+            const cursor = event.target.result;
+
+            if (cursor) {
+                // Found our task? Update its completion status
+                if (cursor.value.id === taskID) {
+                    const updatedTask = { ...cursor.value, completed: checked };
+                    cursor.update(updatedTask);
+                }
+
+                cursor.continue(); // Keep looking through the database
+            }
+        };
+    }
 }
 
-// Instantiate the CRUD class and export it for use in other modules
+// Create an instance we can use throughout the app
 const manageTasks = new taskCRUD();
 export default manageTasks;
