@@ -3,6 +3,7 @@ import { indexedDBError } from '../utils/handleCustomErrors';
 
 function createIndexedDB() {
     // Return a promise to resolve the data
+    
     return new Promise((resolve, reject) => {
         // Check that it exists in the browser, if not, it sends an error
         if (!window.indexedDB) {

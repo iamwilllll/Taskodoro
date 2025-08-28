@@ -1,6 +1,6 @@
 // Import function to create/initialize IndexedDB
 import { indexedDBError } from '../utils/handleCustomErrors';
-import initDB from './InitIndexedDB';
+import initDB from './StartIndexedDB';
 
 // Class that handles all the database operations for tasks
 class taskCRUD {
