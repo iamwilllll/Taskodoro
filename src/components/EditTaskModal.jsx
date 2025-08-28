@@ -20,7 +20,7 @@ function ConfigurationModal({ showEditModal, setShowEditModal, getTaskList, task
         >
             {/* The actual modal box that contains the edit form */}
             <aside
-                className={`m-auto w-10/12 h-9/12 lg:w-4/12 bg-modal-bg rounded-2xl p-5 border-2 border-line-color flex flex-col items-end`}
+                className={`m-auto w-10/12 lg:w-4/12 bg-modal-bg rounded-2xl p-5 border-2 border-line-color flex flex-col items-end`}
             >
                 {/* Close button (the X in the top right corner) */}
                 <button
@@ -31,7 +31,7 @@ function ConfigurationModal({ showEditModal, setShowEditModal, getTaskList, task
                 </button>
 
                 {/* Modal title */}
-                <h2 className="text-center w-full my-5 font-bold text-3xl text-secondary-font-color">Edit task</h2>
+                <h2 className="text-center w-full my-5 font-bold text-3xl text-secondary-font-color mb-10">Edit task</h2>
 
                 {/* Empty div for spacing - keeps the form positioned nicely */}
                 <div className="flex-1"></div>

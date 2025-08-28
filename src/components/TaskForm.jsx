@@ -37,7 +37,7 @@ function TaskForm({ getTaskList, taskData = [] }) {
     };
 
     return (
-        <form className="flex justify-between gap-2" onSubmit={handleTask}>
+        <form className="flex justify-between gap-2 w-full" onSubmit={handleTask}>
             {/* Task input field */}
             <input
                 type="text"
